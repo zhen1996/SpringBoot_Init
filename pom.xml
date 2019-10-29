@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.11.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.example</groupId>
+    <artifactId>demo</artifactId>
+    <version>1.0.0</version>
+    <name>demo</name>
+    <description>Demo project for Spring Boot</description>
+
+    <modules>
+        <!--子项目相对路径-->
+        <module>api</module>
+    </modules>
+
+    <!--项目开发者属性-->
+    <properties>
+        <java.version>1.8</java.version>
+        <project>22</project>
+        <hah>23</hah>
+    </properties>
+    <!-- 在列的项目构建profile，如果被激活，会修改构建处理 -->
+    <profiles>
+
+        <!--        pom.xml中的profile可以看做pom.xml的副本，拥有与pom.xml相同的子元素与配置方法。它包含可选的activation（profile的触发器）和一系列的changes。
+        例如test过程可能会指向不同的数据库（相对最终的deployment）或者不同的dependencies或者不同的repositories，并且是根据不同的JDK来改变的。
+        只需要其中一个成立就可以激活profile，如果第一个条件满足了，那么后面就不会在进行匹配。-->
+
+        <!-- 根据环境参数或命令行参数激活某个构建处理 -->
+        <profile>
+            <!-- 构建配置的唯一标识符。即用于命令行激活，也用于在继承时合并具有相同标识符的profile。 -->
+            <id>local</id>
+            <!-- 自动触发profile的条件逻辑。Activation是profile的开启钥匙。profile的力量来自于它能够
+                 在某些特定的环境中自动使用某些特定的值；这些环境通过activation元素指定。activation元
+                 素并不是激活profile的唯一方式。 -->
+            <activation>
+                <!-- profile默认是否激活的标志 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+    </profiles>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>test</finalName>
+
+        <!--项目相关的所有资源路径列表，例如和项目相关的配置文件、属性文件，这些资源被包含在最终的打包文件里。 -->
+        <resources>
+            <resource>
+                <!--描述了资源的目标路径。该路径相对target/classes目录（例如${project.build.outputDirectory}）。 -->
+                <!--举个例子，如果你想资源在特定的包里(org.apache.maven.messages)，你就必须该元素设置为org/apache/maven/messages。 -->
+                <!--然而，如果你只是想把资源放到源码目录结构里，就不需要该配置。 -->
+                <!--                <targetPath>resources</targetPath>-->
+                <!--                &lt;!&ndash;描述存放资源的目录，该路径相对POM路径 &ndash;&gt;-->
+                <!--                <directory>src/main/resources</directory>-->
+                <!--包含的模式列表 -->
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <!--排除的模式列表 如果<include>与<exclude>划定的范围存在冲突，以<exclude>为准 -->
+                <excludes>
+                    <exclude>jdbc.properties</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!--指定JDK版本-->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF8</encoding>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <!--打包时跳过 test 阶段 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+    <developers>
+        <!--某个项目开发者的信息 -->
+        <developer>
+            <!--SCM里项目开发者的唯一标识符 -->
+            <id></id>
+            <!--项目开发者的全名 -->
+            <name></name>
+            <!--项目开发者的主页的URL -->
+            <url/>
+        </developer>
+    </developers>
+
+    <licenses>
+        <!--描述了项目的license，用于生成项目的web站点的license页面，其他一些报表和validation也会用到该元素。 -->
+        <license>
+            <!--license用于法律上的名称 -->
+            <name>Apache 2</name>
+            <!--官方的license正文页面的URL -->
+            <url>http://www.clf.com/LICENSE-2.0.txt</url>
+            <!--项目分发的主要方式： repo，可以从Maven库下载 manual， 用户必须手动下载和安装依赖 -->
+            <distribution>repo</distribution>
+            <!--关于license的补充信息 -->
+            <comments>Abusiness-friendly OSS license</comments>
+        </license>
+    </licenses>
+
+</project>
