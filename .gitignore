@@ -1,1 +1,14 @@
-/.idea/
+# Created by .ignore support plugin (hsz.mobi)
+.idea/*
+*.dat
+*.iml
+*.class
+*.log
+*.log.*
+.DS_Store
+.bin/*
+*.un~
+*~
+*/target/*
+*/log/*
+log/
