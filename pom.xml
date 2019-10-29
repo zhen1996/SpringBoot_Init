@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -17,6 +18,7 @@
     <modules>
         <!--子项目相对路径-->
         <module>api</module>
+        <module>database</module>
     </modules>
 
     <!--项目开发者属性-->
@@ -83,7 +85,7 @@
     </dependencies>
 
     <build>
-        <finalName>test</finalName>
+        <finalName>Init-Main</finalName>
 
         <!--项目相关的所有资源路径列表，例如和项目相关的配置文件、属性文件，这些资源被包含在最终的打包文件里。 -->
         <resources>
